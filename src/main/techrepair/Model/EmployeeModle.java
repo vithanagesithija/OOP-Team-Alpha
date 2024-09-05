@@ -14,7 +14,7 @@ public class EmployeeModle {
 
         String sql = "INSERT INTO Employee VALUES (?,?,?,?)";
         PreparedStatement ptsm = connection.prepareStatement(sql);
-        ptsm.setString(1, employeesDto.getEid());
+        ptsm.setString(1, employeesDto.getId());
         ptsm.setString(2, employeesDto.getName());
         ptsm.setString(3, employeesDto.getDuty());
         ptsm.setString(4, employeesDto.getEmail());
@@ -29,7 +29,7 @@ public class EmployeeModle {
         ptsm.setString(1, employeesDto.getName());
         ptsm.setString(2, employeesDto.getDuty());
         ptsm.setString(3, employeesDto.getEmail());
-        ptsm.setString(4, employeesDto.getEid());
+        ptsm.setString(4, employeesDto.getId());
 
         return ptsm.executeUpdate() > 0;
     }

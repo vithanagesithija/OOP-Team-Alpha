@@ -19,7 +19,7 @@ public class CustomerModle {
         ptsm.setString(2, customerDto.getName());
         ptsm.setString(3, customerDto.getProblem());
         ptsm.setString(4, customerDto.getOrders());
-        ptsm.setInt(5, customerDto.getContact());
+        ptsm.setString(5, customerDto.getContact());
         ptsm.setString(6, customerDto.getEmail());
         ptsm.setString(7, customerDto.getEmpId());
         return ptsm.executeUpdate() > 0;
@@ -33,7 +33,7 @@ public class CustomerModle {
         pstm.setString(1, customerDto.getName());
         pstm.setString(2, customerDto.getProblem());
         pstm.setString(3, customerDto.getOrders());
-        pstm.setInt(4, customerDto.getContact());
+        pstm.setString(4, customerDto.getContact());
         pstm.setString(5, customerDto.getEmail());
         pstm.setString(6, customerDto.getEmpId());
         pstm.setString(7, customerDto.getId());

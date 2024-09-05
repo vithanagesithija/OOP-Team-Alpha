@@ -43,7 +43,7 @@ CustomerModle customerModle = new CustomerModle();
                 String name = txtCustomerNAme.getText();
                 String problem = txtcusProblem.getText();
                 String Orders = txtcusOrder.getText();
-                int contact = Integer.parseInt(txtcusContact.getText());
+                String contact = txtcusContact.getText();
                 String email = txtCusEmail.getText();
                 String empId = txtCusEmpId.getText();
 

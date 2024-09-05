@@ -17,4 +17,15 @@ public class CustomerDto {
     private String Email;
     private String EmpId;
 
+    public CustomerDto(String id, String name, String problem, String orders, int contact, String email, String empId) {
+        this.Id = id;
+        this.Name = name;
+        this.Problem = problem;
+        this.Orders = orders;
+        this.Contact = String.valueOf(contact);
+        this.Email = email;
+        this.EmpId = empId;
+    }
 }
+
+

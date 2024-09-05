@@ -14,10 +14,10 @@ public class SuppliresModle {
 
         String sql = "INSERT INTO Supplier VALUES (?,?,?,?,?,?)";
         PreparedStatement ptsm = connection.prepareStatement(sql);
-        ptsm.setString(1, suppliersDto.getSUP_id());
+        ptsm.setString(1, suppliersDto.getId());
         ptsm.setString(2, suppliersDto.getName());
-        ptsm.setString(3, suppliersDto.getP_number());
-        ptsm.setString(4, suppliersDto.getQty());
+        ptsm.setString(3, suppliersDto.getContact());
+        ptsm.setString(4, suppliersDto.getQuantity());
         ptsm.setInt(5, suppliersDto.getPrice());
         ptsm.setString(6,suppliersDto.getAddress());
 
@@ -30,11 +30,11 @@ public class SuppliresModle {
         String sql = "UPDATE Supplier SET Name = ?, Contact = ?, Quantity = ?, Price = ?, Address = ? WHERE Id = ?";
         PreparedStatement pstm = connection.prepareStatement(sql);
         pstm.setString(1, suppliersDto.getName());
-        pstm.setString(2, suppliersDto.getP_number());
-        pstm.setString(3, suppliersDto.getQty());
+        pstm.setString(2, suppliersDto.getContact());
+        pstm.setString(3, suppliersDto.getQuantity());
         pstm.setInt(4, suppliersDto.getPrice());
         pstm.setString(5, suppliersDto.getAddress());
-        pstm.setString(6, suppliersDto.getSUP_id());
+        pstm.setString(6, suppliersDto.getId());
 
 
         return pstm.executeUpdate() > 0;
