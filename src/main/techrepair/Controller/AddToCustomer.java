@@ -34,7 +34,7 @@ public class AddToCustomer extends JFrame {
                 String name = txtName.getText();
                 String problem = txtproblem.getText();
                 String Orders = txtOrders.getText();
-                int contact = Integer.parseInt(txtContact.getText());
+                String contact = txtContact.getText();
                 String email = txtEmail.getText();
                 String empId = txtempID.getText();
                    // txt filed value into the DTO object for data transfer-
