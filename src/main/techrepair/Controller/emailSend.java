@@ -10,11 +10,10 @@ import java.sql.*;
 
 public class emailSend extends JFrame {
     private JButton sendEmailToCustomerButton;
-    private JButton sendEmailToEmployeeButton;
     public JPanel backPane;
     private JTextField txtCustomerID;
-    private JTextField txtEmpId;
-    private JTextField textContent;
+    private JTextArea textContent;
+    private JButton sendEmailToEmployyButton;
 
     public emailSend() {
 
@@ -50,6 +49,33 @@ public class emailSend extends JFrame {
                 }
             }
         });
+
+        sendEmailToEmployyButton.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                try {
+                    String query = "SELECT * FROM Employee WHERE Id = ?";
+
+                    try (Connection connection = DbConnection.getInstance().getConnection();
+                         PreparedStatement preparedStatement = connection.prepareStatement(query)) {
+
+                        ResultSet resultSet = preparedStatement.executeQuery();
+
+                        while (resultSet.next()) {
+                            String email = resultSet.getString("email");
+                            System.out.println(email);
+                            sendEmail.sendEmail(email,"Email from TechRepair" ,textContent.getText());
+                        }
+
+                    } catch (SQLException ex) {
+                        throw new RuntimeException(ex);
+                    }
+
+                }catch (RuntimeException exception){
+                    System.out.println(exception);
+                }
+            }
+        });
     }
 
 
@@ -57,8 +83,8 @@ public class emailSend extends JFrame {
     public static void main(String[] args) {
         emailSend emailSend = new emailSend();
         emailSend.setContentPane(emailSend.backPane);
-        emailSend.setTitle("Login TechRepair");
-        emailSend.setSize(400,400);
+        emailSend.setTitle("Send Email");
+        emailSend.setSize(700,500);
         emailSend.setVisible(true);
     }
 }
