@@ -62,7 +62,7 @@ public class CustomerUI extends JFrame {
             // Populate the table model with data from the database
             var resultSet = pstm.executeQuery();
             while (resultSet.next()) {
-                String customerID = resultSet.getString("customerID");
+                String customerID = resultSet.getString("Id");
                 String name = resultSet.getString("name");
                 String contact = resultSet.getString("contact");
                 String email = resultSet.getString("email");
