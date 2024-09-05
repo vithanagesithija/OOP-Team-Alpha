@@ -17,6 +17,7 @@ public class CustomerUI extends JFrame {
     private JButton ADDCustomerButton;
     private JScrollPane scrollTable;
     private JTable tableCustomers;
+    private JButton refreshDataButton;
 
     private DefaultTableModel tableModel;
 
@@ -44,6 +45,13 @@ public class CustomerUI extends JFrame {
             @Override
             public void actionPerformed(ActionEvent e) {
                 viewUpdateCustomer();
+            }
+        });
+
+        refreshDataButton.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                refreshTable();
             }
         });
     }
@@ -81,8 +89,8 @@ public class CustomerUI extends JFrame {
     public void viewAddCustomer() {
         AddToCustomer addToCustomer = new AddToCustomer();
         addToCustomer.setContentPane(addToCustomer.backPane);
-        addToCustomer.setTitle("Login TechRepair");
-        addToCustomer.setSize(400,400);
+        addToCustomer.setTitle("Add Customer");
+        addToCustomer.setSize(800,600);
         addToCustomer.setVisible(true);
 
     }
@@ -90,8 +98,8 @@ public class CustomerUI extends JFrame {
     public void viewUpdateCustomer() {
         UpdateCustomer updateCustomer = new UpdateCustomer();
         updateCustomer.setContentPane(updateCustomer.backPane);
-        updateCustomer.setTitle("Login TechRepair");
-        updateCustomer.setSize(400,400);
+        updateCustomer.setTitle("View Customer");
+        updateCustomer.setSize(800,600);
         updateCustomer.setVisible(true);
 
     }
@@ -99,7 +107,8 @@ public class CustomerUI extends JFrame {
     public void  viewDeleteCustomer(){
         DeleteCustomer deleteCustomer = new DeleteCustomer();
         deleteCustomer.setContentPane(deleteCustomer.backPane);
-        deleteCustomer.setSize(400,400);
+        deleteCustomer.setTitle("Delete Customer");
+        deleteCustomer.setSize(800,600);
         deleteCustomer.setVisible(true);
     }
 }

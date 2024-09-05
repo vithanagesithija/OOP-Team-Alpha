@@ -12,11 +12,8 @@ public class UpdateCustomer extends  JFrame{
     public JPanel backPane;
     private JTextField txtCustomerId;
     private JTextField txtCustomerNAme;
-    private JTextField txtcusProblem;
-    private JTextField txtcusOrder;
     private JTextField txtcusContact;
     private JTextField txtCusEmail;
-    private JTextArea txtCusEmpId;
     private JButton updateButton;
     private JButton canselButton;
 CustomerModle customerModle = new CustomerModle();
@@ -27,13 +24,8 @@ CustomerModle customerModle = new CustomerModle();
             public void actionPerformed(ActionEvent e) {
                 txtCustomerId.setText("");
                 txtCustomerNAme.setText("");
-                txtcusProblem.setText("");
-                txtcusOrder.setText("");
                 txtCusEmail.setText("");
-                txtCusEmpId.setText("");
                 txtcusContact.setText("");
-
-
             }
         });
         updateButton.addActionListener(new ActionListener() {
@@ -41,13 +33,10 @@ CustomerModle customerModle = new CustomerModle();
             public void actionPerformed(ActionEvent e) {
                 String id =txtCustomerId.getText();
                 String name = txtCustomerNAme.getText();
-                String problem = txtcusProblem.getText();
-                String Orders = txtcusOrder.getText();
                 String contact = txtcusContact.getText();
                 String email = txtCusEmail.getText();
-                String empId = txtCusEmpId.getText();
 
-                var customerDto = new CustomerDto(id,name,problem,Orders,contact,email,empId);
+                var customerDto = new CustomerDto(id,name,contact,email);
                 try{
                     boolean isSave = customerModle.updateCustomer(customerDto);
                     if (isSave){
