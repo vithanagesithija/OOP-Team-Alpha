@@ -12,12 +12,13 @@ import DBLayer.DbConnection;
 import DTO.CustomerJobDto;
 import DTO.OrderDto;
 import Model.CustomerJobModel;
+import Utils.CustomerNotification;
 
 public class CustomerJobs extends JFrame {
 
     public JPanel backPane;
     private JTable CustomerJobsTable;
-    private JTextField EmpID;
+    private JTextField OrderIDDDD;
     private JButton markFinshButton;
     private JTextField txtorderId;
     private JTextField txtCustomerId;
@@ -28,6 +29,7 @@ public class CustomerJobs extends JFrame {
     private JTextField textCname;
     private JTextField textPrice;
     private JScrollPane scrollTable;
+    private JButton refreshDataButton;
     CustomerJobModel customerJobModel = new CustomerJobModel();
     private DefaultTableModel tableModel;
 
@@ -36,18 +38,24 @@ public class CustomerJobs extends JFrame {
         cretaTableUI();
         refreshTable();
 
+        CustomerNotification notification = new CustomerNotification();
+
         markFinshButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                   String orderId = EmpID.getText();
-                   String price = textPrice.getText();
-                   String cname = textCname.getText();
-                   var OrderDto = new OrderDto(orderId,cname,price);
+                   String orderId = OrderIDDDD.getText();
 
 ;                try {
-                    boolean isDeleted = customerJobModel.deleteCustomerOrder(orderId);
-                    customerJobModel.saveCustomerFishOrder(OrderDto);
-                    if(isDeleted) {
+                    boolean isOrderExist = customerJobModel.isOrderExist(orderId);
+                    if(isOrderExist) {
+                        // Get customer Email
+                        try {
+                            String email = customerJobModel.getCustomerEmailbyOrderId(orderId);
+                            notification.updateOrderState(email, "Customer", orderId, "Finished");
+                        } catch (SQLException ex) {
+                            throw new RuntimeException(ex);
+                        }
+                        customerJobModel.deleteCustomerOrder(orderId);
                         JOptionPane.showMessageDialog(null, "Fishid the order place send Email to customer", "Confirmation", JOptionPane.INFORMATION_MESSAGE);
                     } else {
                         JOptionPane.showMessageDialog(null, "Suppliers ID not matched!", "Confirmation", JOptionPane.INFORMATION_MESSAGE);
@@ -65,12 +73,21 @@ public class CustomerJobs extends JFrame {
                 String CustomerId = txtCustomerId.getText();
                 String problm = txtProblm.getText();
                 String EmpId = txtEmpId.getText();
+                Double price = Double.parseDouble(textPrice.getText());
 
-                var CustomerJobDyo = new CustomerJobDto(oid,CustomerId,EmpId,problm);
+
+                var CustomerJobDyo = new CustomerJobDto(oid,CustomerId,EmpId,problm,price);
                 try{
                     boolean isSave = customerJobModel.saveCustomerJob(CustomerJobDyo);
                     if (isSave){
                         JOptionPane.showMessageDialog(null, "Customer job member has been saved!", "Confirmation", JOptionPane.INFORMATION_MESSAGE);
+                        // Get customer Email
+                        try {
+                            String email = customerJobModel.getCustEmail(CustomerId);
+                            notification.invoiceEmail(email,"Customer",oid,price);
+                        } catch (SQLException ex) {
+                            throw new RuntimeException(ex);
+                        }
                     }
                 }catch (SQLException exception){
                     JOptionPane.showMessageDialog(null, exception.getMessage(), "Error", JOptionPane.ERROR_MESSAGE);
@@ -84,13 +101,21 @@ public class CustomerJobs extends JFrame {
                 txtCustomerId.setText("");
                 txtProblm.setText("");
                 txtEmpId.setText("");
+                textPrice.setText("");
+            }
+        });
+
+        refreshDataButton.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                refreshTable();
             }
         });
     }
 
     public  void cretaTableUI(){
         tableModel = new DefaultTableModel();
-        tableModel.setColumnIdentifiers(new String[]{"Order ID", "Customer ID", "Employee ID", "Problem"});
+        tableModel.setColumnIdentifiers(new String[]{"Order ID", "Customer ID", "Employee ID", "Problem","Price"});
         CustomerJobsTable.setModel(tableModel);
         scrollTable.setViewportView(CustomerJobsTable);
     }
@@ -110,7 +135,8 @@ public class CustomerJobs extends JFrame {
                 String customer_id = pstm.getResultSet().getString("CustomerId");
                 String employee_id = pstm.getResultSet().getString("EmployeeId");
                 String problem = pstm.getResultSet().getString("Problem");
-                tableModel.addRow(new String[]{order_id, customer_id, employee_id, problem});
+                Double price = pstm.getResultSet().getDouble("Price");
+                tableModel.addRow(new String[]{order_id, customer_id, employee_id, problem, "Rs."+ String.valueOf(price)});
             }
 
 

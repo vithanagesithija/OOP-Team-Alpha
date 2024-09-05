@@ -12,4 +12,5 @@ public class CustomerJobDto {
     String CustomerId;
     String EmployeeId;
     String Problem;
+    Double Price;
 }

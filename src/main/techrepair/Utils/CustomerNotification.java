@@ -44,5 +44,16 @@ public class CustomerNotification {
 
         sendEmailService.sendEmail(email, subject, messageText);
     }
+
+    public  void invoiceEmail(String email, String name, String orderId, Double price) {
+        String subject = "Invoice for Your Device Repair";
+        String messageText = "Dear " + name + ",\n\n" +
+                "We have completed the repair of your device (Order ID: " + orderId + ").\n\n" +
+                "Total Price: Rs." + price + "\n\n" +
+                "Please make the payment at your earliest convenience.\n\n" +
+                "Best regards,\nTechRepair Team";
+
+        sendEmailService.sendEmail(email, subject, messageText);
+    }
 }
 
