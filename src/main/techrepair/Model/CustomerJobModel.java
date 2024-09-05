@@ -13,7 +13,7 @@ public class CustomerJobModel {
     public boolean saveCustomerJob(CustomerJobDto customerJobDto) throws SQLException {
         Connection connection = DbConnection.getInstance().getConnection();
 
-        String sql = "INSERT INTO Orders VALUES (?,?,?,?)";
+        String sql = "INSERT INTO `Order` (Id, CustomerId, EmployeeId) VALUES (?,?,?,?)";
         PreparedStatement ptsm = connection.prepareStatement(sql);
         ptsm.setString(1, customerJobDto.getId());
         ptsm.setString(2,customerJobDto.getCustomerId());

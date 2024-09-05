@@ -66,7 +66,7 @@ public class CustomerJobs extends JFrame {
                 String problm = txtProblm.getText();
                 String EmpId = txtEmpId.getText();
 
-                var CustomerJobDyo = new CustomerJobDto(oid,CustomerId,problm,EmpId);
+                var CustomerJobDyo = new CustomerJobDto(oid,CustomerId,EmpId,problm);
                 try{
                     boolean isSave = customerJobModel.saveCustomerJob(CustomerJobDyo);
                     if (isSave){
@@ -90,7 +90,7 @@ public class CustomerJobs extends JFrame {
 
     public  void cretaTableUI(){
         tableModel = new DefaultTableModel();
-        tableModel.setColumnIdentifiers(new String[]{"Order ID", "Customer ID", "Problem", "Employee ID"});
+        tableModel.setColumnIdentifiers(new String[]{"Order ID", "Customer ID", "Employee ID", "Problem"});
         CustomerJobsTable.setModel(tableModel);
         scrollTable.setViewportView(CustomerJobsTable);
     }
