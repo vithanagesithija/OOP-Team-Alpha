@@ -18,7 +18,6 @@ public class AddToCustomer extends JFrame {
     public JPanel backPane;
     private JTextField txtempID;
     private JLabel email;
-    private JTable CustomersTable;
     //creat csutomer model object for acses it functions
     CustomerModle customerModle = new CustomerModle();
 

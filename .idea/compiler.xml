@@ -8,6 +8,7 @@
         <sourceTestOutputDir name="target/generated-test-sources/test-annotations" />
         <outputRelativeToContentRoot value="true" />
         <module name="TechRepair" />
+        <module name="TechRepair" />
       </profile>
     </annotationProcessing>
   </component>
