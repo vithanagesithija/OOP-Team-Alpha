@@ -29,12 +29,12 @@ public class LoginForm extends JFrame{
                     if (isValid) {
                         viewDasboard();
                     } else {
-
-
                         JOptionPane.showMessageDialog(null, "User Name And Password Did Not Matched. Please try again.", "Error", JOptionPane.ERROR_MESSAGE);
+                        return;
                     }
                 } catch (SQLException exception) {
                     JOptionPane.showMessageDialog(null, exception.getMessage(), "Error", JOptionPane.ERROR_MESSAGE);
+                    return;
                 }
                 viewDasboard();
 

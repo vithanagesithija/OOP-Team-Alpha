@@ -9,13 +9,21 @@ public class DbConnection {
     private Connection connection;
 
     private DbConnection() throws SQLException {
-        connection = DriverManager.getConnection("jdbc:mysql://localhost:3306/TechRepair", "root", "sahaN200200702836");
+        connection = DriverManager.getConnection(
+                "jdbc:mysql://49.13.200.232:3308/techrepair",
+                "malith",
+                "ThBGSdeObmVuXR3RjfT6Z2yMYaWzGbEgzQJMFtcpuv5e9wYLirzF2j85CcyFQKrQ"
+        );
     }
 
     public static DbConnection getInstance() throws SQLException {
-        return (null == dbConnection) ? dbConnection = new DbConnection() : dbConnection;
+        if (dbConnection == null) {
+            dbConnection = new DbConnection();
+        }
+        return dbConnection;
     }
-    public Connection getConnection(){
+
+    public Connection getConnection() {
         return connection;
     }
 }
