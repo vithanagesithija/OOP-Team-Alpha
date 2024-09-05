@@ -25,13 +25,9 @@ public class InventoryView extends JFrame {
 
         setLayout(new BorderLayout());
         tableModel = new DefaultTableModel();
-        tableModel.setColumnIdentifiers(new String[]{"ID", "Supplier Name", "Phone number", "Qty", "Price", "Address"});
-        InTable = new javax.swing.JTable();
-        InTable = new JTable(tableModel);
-        Inven = new javax.swing.JScrollPane();
+        tableModel.setColumnIdentifiers(new String[]{"ID", "Supplier Name", "Phone number", "Quantity", "Price", "Address"});
+        InTable.setModel(tableModel);
         Inven.setViewportView(InTable);
-
-
 
         refreshTable();
 
@@ -43,38 +39,37 @@ public class InventoryView extends JFrame {
             }
         });
     }
-    private  void refreshTable() {
+
+    private void refreshTable() {
         try {
             System.out.println("********.refreshTable().*******");
             Connection connection = DbConnection.getInstance().getConnection();
-            String SQL = "SELECT * FROM supplier ";
+            String SQL = "SELECT * FROM Supplier";
             PreparedStatement pstm = connection.prepareStatement(SQL);
             ResultSet resultSet = pstm.executeQuery();
 
-
-            // Clear the table model
+            // Clear the table model before adding new rows
             tableModel.setRowCount(0);
 
             while (resultSet.next()) {
-                String order_id = resultSet.getString("supplierID");
-                String customer_name = resultSet.getString("S_name");
-                String email = resultSet.getString("P_number");
-                String status = resultSet.getString("qty");
-                String empNo = Integer.toString(resultSet.getInt("price"));
-                String date = resultSet.getString("address");
+                String order_id = resultSet.getString("Id");
+                String customer_name = resultSet.getString("Name");
+                String email = resultSet.getString("Contact");
+                String status = resultSet.getString("Quantity");
+                String empNo = Integer.toString(resultSet.getInt("Price"));
+                String date = resultSet.getString("Address");
 
-                System.out.println("***customer_name***** "+customer_name);
+                System.out.println("***customer_name***** " + customer_name);
                 System.out.println(order_id);
                 System.out.println(email);
                 System.out.println(status);
                 System.out.println(empNo);
                 System.out.println(date);
-                DefaultTableModel df1 = (DefaultTableModel) InTable.getModel();
-                df1.setRowCount(0);
-                df1.addRow(new Object[]{order_id, customer_name, email, status, empNo, date});
-                System.out.println("count "+tableModel.getRowCount());
-            }
 
+                // Add row to the table model
+                tableModel.addRow(new Object[]{order_id, customer_name, email, status, empNo, date});
+                System.out.println("count " + tableModel.getRowCount());
+            }
 
         } catch (SQLException ex) {
             // Handle the exception in a user-friendly way
@@ -82,9 +77,6 @@ public class InventoryView extends JFrame {
             ex.printStackTrace();
         }
     }
-
-
-
 
 
 
