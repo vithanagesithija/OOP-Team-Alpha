@@ -4,8 +4,11 @@ import javax.swing.*;
 import javax.swing.table.DefaultTableModel;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.sql.Connection;
+import java.sql.PreparedStatement;
 import java.sql.SQLException;
 
+import DBLayer.DbConnection;
 import DTO.CustomerJobDto;
 import DTO.OrderDto;
 import Model.CustomerJobModel;
@@ -24,10 +27,15 @@ public class CustomerJobs extends JFrame {
     private JButton clearButton;
     private JTextField textCname;
     private JTextField textPrice;
+    private JScrollPane scrollTable;
     CustomerJobModel customerJobModel = new CustomerJobModel();
     private DefaultTableModel tableModel;
 
     public CustomerJobs() {
+
+        cretaTableUI();
+        refreshTable();
+
         markFinshButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
@@ -82,11 +90,35 @@ public class CustomerJobs extends JFrame {
 
     public  void cretaTableUI(){
         tableModel = new DefaultTableModel();
-        tableModel.addColumn("Customer Id");
-        tableModel.addColumn("Emp Id");
-        tableModel.addColumn("Job type");
-        CustomerJobsTable = new JTable(tableModel);
+        tableModel.setColumnIdentifiers(new String[]{"Order ID", "Customer ID", "Problem", "Employee ID"});
+        CustomerJobsTable.setModel(tableModel);
+        scrollTable.setViewportView(CustomerJobsTable);
+    }
 
+    public void refreshTable() {
+        System.out.println("********.refreshTable().*******");
+        try{
+            Connection connection = DbConnection.getInstance().getConnection();
+            String SQL = "SELECT * FROM `Order`";
+            PreparedStatement pstm = connection.prepareStatement(SQL);
+            pstm.executeQuery();
+
+            tableModel.setRowCount(0);
+
+            while (pstm.getResultSet().next()) {
+                String order_id = pstm.getResultSet().getString("Id");
+                String customer_id = pstm.getResultSet().getString("CustomerId");
+                String employee_id = pstm.getResultSet().getString("EmployeeId");
+                String problem = pstm.getResultSet().getString("Problem");
+                tableModel.addRow(new String[]{order_id, customer_id, employee_id, problem});
+            }
+
+
+        } catch (SQLException ex) {
+            // Handle the exception in a user-friendly way
+            JOptionPane.showMessageDialog(this, "Error retrieving data from the database.", "Error", JOptionPane.ERROR_MESSAGE);
+            ex.printStackTrace();
+        }
     }
 
 

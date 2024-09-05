@@ -41,7 +41,7 @@ public class RepoartGenarate extends JFrame {
             try {
                 System.out.println("********.refreshTable().*******");
                 Connection connection = DbConnection.getInstance().getConnection();
-                String SQL = "SELECT * FROM orders ";
+                String SQL = "SELECT * FROM `Order` ";
                 PreparedStatement pstm = connection.prepareStatement(SQL);
                 ResultSet resultSet = pstm.executeQuery();
                 System.out.println("********.refreshTable().*******");

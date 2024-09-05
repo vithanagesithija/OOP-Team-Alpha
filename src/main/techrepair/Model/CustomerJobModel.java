@@ -26,7 +26,7 @@ public class CustomerJobModel {
     public boolean deleteCustomerOrder(String id) throws SQLException {
         Connection connection = DbConnection.getInstance().getConnection();
 
-        String sql = "DELETE FROM Orders WHERE Id = ?";
+        String sql = "DELETE FROM `Order` WHERE Id = ?";
         PreparedStatement pstm = connection.prepareStatement(sql);
 
         pstm.setString(1, id);
