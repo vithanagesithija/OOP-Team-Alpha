@@ -36,8 +36,6 @@ public class LoginForm extends JFrame{
                     JOptionPane.showMessageDialog(null, exception.getMessage(), "Error", JOptionPane.ERROR_MESSAGE);
                     return;
                 }
-                viewDasboard();
-
             }
         });
     }
