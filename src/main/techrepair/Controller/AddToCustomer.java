@@ -1,6 +1,8 @@
 package Controller;
 import DTO.CustomerDto;
 import Model.CustomerModle;
+import Utils.CustomerNotification;
+
 import javax.swing.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -18,7 +20,8 @@ public class AddToCustomer extends JFrame {
     CustomerModle customerModle = new CustomerModle();
 
     public AddToCustomer() {
-
+        // Customer Notification for send notification to the customer
+        CustomerNotification notification = new CustomerNotification();
 
         //model = SQL conctions
         //DTO = data tranfer object
@@ -36,6 +39,13 @@ public class AddToCustomer extends JFrame {
                     boolean isSave = customerModle.saveCustomer(customerDto);
                     if (isSave){
                         JOptionPane.showMessageDialog(null, "Customer has been saved!", "Confirmation", JOptionPane.INFORMATION_MESSAGE);
+
+                        // Send welcome notification
+                        try {
+                            notification.welcomeEmail(email, name);
+                        } catch (Exception exception) {
+                            JOptionPane.showMessageDialog(null, exception.getMessage(), "Error", JOptionPane.ERROR_MESSAGE);
+                        }
                     }
                 }catch (SQLException exception){
                     JOptionPane.showMessageDialog(null, exception.getMessage(), "Error", JOptionPane.ERROR_MESSAGE);

@@ -19,7 +19,6 @@ public class SendEmail {
         props.put("mail.smtp.port", String.valueOf(port));
         props.put("mail.smtp.auth", "true");
         props.put("mail.smtp.ssl.enable", "true");
-        props.put("mail.smtp.ssl.trust", host);
 
         // Create a session with authentication
         Session session = Session.getInstance(props, new javax.mail.Authenticator() {
@@ -27,6 +26,8 @@ public class SendEmail {
                 return new PasswordAuthentication(username, password);
             }
         });
+
+        session.setDebug(true);
 
         try {
             // Create a default MimeMessage object
@@ -52,11 +53,5 @@ public class SendEmail {
         } catch (MessagingException e) {
             e.printStackTrace();
         }
-    }
-
-    public static void main(String[] args) {
-        // Example usage
-        SendEmail sendEmail = new SendEmail();
-        sendEmail.sendEmail("recipient@example.com", "Test Subject", "This is a test email message.");
     }
 }

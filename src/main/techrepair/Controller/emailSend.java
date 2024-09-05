@@ -1,16 +1,12 @@
 package Controller;
 
 import DBLayer.DbConnection;
-import com.google.protobuf.Message;
-import com.mysql.cj.Session;
-import com.sun.net.httpserver.Authenticator;
+import Utils.SendEmail;
 
 import javax.swing.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.net.PasswordAuthentication;
 import java.sql.*;
-import java.util.Properties;
 
 public class emailSend extends JFrame {
     private JButton sendEmailToCustomerButton;
@@ -18,25 +14,17 @@ public class emailSend extends JFrame {
     public JPanel backPane;
     private JTextField txtCustomerID;
     private JTextField txtEmpId;
-
-    private static final String SMTP_HOST = "smtp.gmail.com";
-    private static final int SMTP_PORT = 587;
-
-    //    Go to https://myaccount.google.com/u/7/lesssecureapps and toggle on Allow Less secure apps
-    private static final String EMAIL_USERNAME = "TechRepair@gmail.com"; // Replace with your Gmail username
-    private static final String EMAIL_PASSWORD = "TechRepair0000"; // Replace with your Gmail password
-
-    EmailSendCustomer emailSendCustomer = new EmailSendCustomer();
+    private JTextField textContent;
 
     public emailSend() {
 
-
+        SendEmail sendEmail = new SendEmail();
         sendEmailToCustomerButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
                 try {
                     String customer = txtCustomerID.getText();
-                    String query = "SELECT * FROM customer WHERE customerID = ?";
+                    String query = "SELECT * FROM Customer WHERE Id = ?";
 
 
                     try (Connection connection = DbConnection.getInstance().getConnection();
@@ -48,8 +36,7 @@ public class emailSend extends JFrame {
                         if (resultSet.next()) {
                             String email = resultSet.getString("email");
                             System.out.println(email);
-                            emailSendCustomer.sendMail(email);
-                            // Perform further actions, e.g., send email or update UI
+                            sendEmail.sendEmail(email,"Email from TechRepair" ,textContent.getText());
                         }
 
                     } catch (SQLException ex) {
