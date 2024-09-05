@@ -8,12 +8,12 @@ import java.sql.PreparedStatement;
 import java.sql.SQLException;
 
 public class CustomerModle {
-    // functios
+    // functions
     public boolean saveCustomer(CustomerDto customerDto) throws SQLException {
-        //db connctiond
+        //db connction
         Connection connection = DbConnection.getInstance().getConnection();
         // data insert to database
-        String sql = "INSERT INTO customer VALUES (?,?,?,?,?,?,?)";
+        String sql = "INSERT INTO Customer VALUES (?,?,?,?,?,?,?)";
         PreparedStatement ptsm = connection.prepareStatement(sql);
         ptsm.setString(1, customerDto.getId());
         ptsm.setString(2, customerDto.getName());
@@ -28,7 +28,7 @@ public class CustomerModle {
     public boolean updateCustomer(CustomerDto customerDto) throws SQLException {
         Connection connection = DbConnection.getInstance().getConnection();
 
-        String sql = "UPDATE customer SET name = ?, problem = ?, orders = ?, contact = ?, email = ?, empID = ? WHERE customerID = ?";
+        String sql = "UPDATE Customer SET Name = ?, Problem = ?, Orders = ?, Contact = ?, Email = ?, EmpId = ? WHERE Id = ?";
         PreparedStatement pstm = connection.prepareStatement(sql);
         pstm.setString(1, customerDto.getName());
         pstm.setString(2, customerDto.getProblem());
@@ -44,7 +44,7 @@ public class CustomerModle {
     public boolean deleteCustomer(String id) throws SQLException {
         Connection connection = DbConnection.getInstance().getConnection();
 
-        String sql = "DELETE FROM customer WHERE customerID = ?";
+        String sql = "DELETE FROM Customer WHERE Id = ?";
         PreparedStatement pstm = connection.prepareStatement(sql);
 
         pstm.setString(1, id);

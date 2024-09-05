@@ -10,9 +10,9 @@ import lombok.NoArgsConstructor;
 public class SuppliersDto {
 
     private String Name;
-    private String SUP_id;
-    private String Qty;
-    private String P_number;
+    private String Id;
+    private String Quantity;
+    private String Contact;
     private int Price;
     private String Address;
 

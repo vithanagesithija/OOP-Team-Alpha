@@ -13,7 +13,7 @@ public class CustomerJobModel {
     public boolean saveCustomerJob(CustomerJobDto customerJobDto) throws SQLException {
         Connection connection = DbConnection.getInstance().getConnection();
 
-        String sql = "INSERT INTO orders VALUES (?,?,?,?)";
+        String sql = "INSERT INTO Orders VALUES (?,?,?,?)";
         PreparedStatement ptsm = connection.prepareStatement(sql);
         ptsm.setString(1, customerJobDto.getOrderId());
         ptsm.setString(2,customerJobDto.getCusId());
@@ -26,7 +26,7 @@ public class CustomerJobModel {
     public boolean deleteCustomerOrder(String id) throws SQLException {
         Connection connection = DbConnection.getInstance().getConnection();
 
-        String sql = "DELETE FROM orders WHERE orderID = ?";
+        String sql = "DELETE FROM Orders WHERE Id = ?";
         PreparedStatement pstm = connection.prepareStatement(sql);
 
         pstm.setString(1, id);
@@ -37,7 +37,7 @@ public class CustomerJobModel {
     public boolean saveCustomerFishOrder(OrderDto orderDto) throws SQLException {
         Connection connection = DbConnection.getInstance().getConnection();
 
-        String sql = "INSERT INTO Repoart VALUES (?,?,?)";
+        String sql = "INSERT INTO Report VALUES (?,?,?)";
         PreparedStatement ptsm = connection.prepareStatement(sql);
         ptsm.setString(1, orderDto.getOrderID());
         ptsm.setString(2, orderDto.getCustName());

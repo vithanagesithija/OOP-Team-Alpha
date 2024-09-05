@@ -15,7 +15,7 @@ public class InventoryViewModel {
    public List<InventoryViewDto> getAllInventroy() throws SQLException {
 
        Connection connection = DbConnection.getInstance().getConnection();
-       String SQl = "SELECT * FROM supplier ";
+       String SQl = "SELECT * FROM Supplier ";
        PreparedStatement pstm = connection.prepareStatement(SQl);
        ResultSet resultSet = pstm.executeQuery();
 

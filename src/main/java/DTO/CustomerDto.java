@@ -11,10 +11,10 @@ import lombok.NoArgsConstructor;
 public class CustomerDto {
     private String Id;
     private String Name;
-    private String problem;
-    private String orders;
-    private int contact;
-    private String email;
-    private String empId;
+    private String Problem;
+    private String Orders;
+    private String Contact;
+    private String Email;
+    private String EmpId;
 
 }

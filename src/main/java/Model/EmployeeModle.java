@@ -12,7 +12,7 @@ public class EmployeeModle {
     public boolean saveEmployee(EmployeesDto employeesDto) throws SQLException {
         Connection connection = DbConnection.getInstance().getConnection();
 
-        String sql = "INSERT INTO employee VALUES (?,?,?,?)";
+        String sql = "INSERT INTO Employee VALUES (?,?,?,?)";
         PreparedStatement ptsm = connection.prepareStatement(sql);
         ptsm.setString(1, employeesDto.getEid());
         ptsm.setString(2, employeesDto.getName());
@@ -24,7 +24,7 @@ public class EmployeeModle {
     public  boolean updateEmployee(EmployeesDto employeesDto) throws SQLException {
         Connection connection = DbConnection.getInstance().getConnection();
 
-        String sql = "UPDATE  employee SET  name = ?, duty = ?, email = ? WHERE employeeID = ?";
+        String sql = "UPDATE  Employee SET  Name = ?, Duty = ?, Email = ? Id = ?";
         PreparedStatement ptsm = connection.prepareStatement(sql);
         ptsm.setString(1, employeesDto.getName());
         ptsm.setString(2, employeesDto.getDuty());
@@ -37,7 +37,7 @@ public class EmployeeModle {
     public boolean deleteEmployee(String id) throws SQLException {
         Connection connection = DbConnection.getInstance().getConnection();
 
-        String sql = "DELETE FROM employee WHERE employeeID = ?";
+        String sql = "DELETE FROM Employee WHERE Id = ?";
         PreparedStatement pstm = connection.prepareStatement(sql);
 
         pstm.setString(1, id);

@@ -12,7 +12,7 @@ public class SuppliresModle {
     public boolean saveSupplires(SuppliersDto suppliersDto) throws SQLException {
         Connection connection = DbConnection.getInstance().getConnection();
 
-        String sql = "INSERT INTO supplier VALUES (?,?,?,?,?,?)";
+        String sql = "INSERT INTO Supplier VALUES (?,?,?,?,?,?)";
         PreparedStatement ptsm = connection.prepareStatement(sql);
         ptsm.setString(1, suppliersDto.getSUP_id());
         ptsm.setString(2, suppliersDto.getName());
@@ -27,7 +27,7 @@ public class SuppliresModle {
     public boolean updatesupplires(SuppliersDto suppliersDto) throws SQLException {
         Connection connection = DbConnection.getInstance().getConnection();
 
-        String sql = "UPDATE supplier SET S_name = ?, P_number = ?, qty = ?, price = ?, address = ? WHERE supplierID = ?";
+        String sql = "UPDATE Supplier SET Name = ?, Contact = ?, Quantity = ?, Price = ?, Address = ? WHERE Id = ?";
         PreparedStatement pstm = connection.prepareStatement(sql);
         pstm.setString(1, suppliersDto.getName());
         pstm.setString(2, suppliersDto.getP_number());
@@ -43,7 +43,7 @@ public class SuppliresModle {
     public boolean deleteSuppliers(String id) throws SQLException {
         Connection connection = DbConnection.getInstance().getConnection();
 
-        String sql = "DELETE FROM supplier WHERE supplierID = ?";
+        String sql = "DELETE FROM Supplier WHERE Id = ?";
         PreparedStatement pstm = connection.prepareStatement(sql);
 
         pstm.setString(1, id);

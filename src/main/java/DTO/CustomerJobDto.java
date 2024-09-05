@@ -8,8 +8,8 @@ import lombok.NoArgsConstructor;
 @AllArgsConstructor
 @NoArgsConstructor
 public class CustomerJobDto {
-    String orderId;
-    String cusId;
-    String empID;
-    String prblem;
+    String Id;
+    String CusId;
+    String EmpId;
+    String Problem;
 }

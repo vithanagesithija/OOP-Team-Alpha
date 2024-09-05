@@ -8,9 +8,9 @@ import lombok.NoArgsConstructor;
 @AllArgsConstructor
 @NoArgsConstructor
 public class InventoryViewDto {
-    String ProductId;
+    String Id;
     String name;
-    String Qty;
+    String Quantity;
     int Price;
 
 
