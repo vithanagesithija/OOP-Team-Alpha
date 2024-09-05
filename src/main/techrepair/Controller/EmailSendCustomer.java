@@ -13,7 +13,7 @@ public class EmailSendCustomer {
         String to = customerMail;
 
         // Sender's email ID needs to be mentioned
-        String from = "car.zone008@gmail.com";
+        String from = "techrepairnfr@gmail.com";
 
         // Assuming you are sending email from through gmails smtp
         String host = "smtp.gmail.com";
@@ -32,7 +32,7 @@ public class EmailSendCustomer {
 
             protected PasswordAuthentication getPasswordAuthentication() {
 
-                return new PasswordAuthentication(from, "phtknygiuselcunn");
+                return new PasswordAuthentication(from, "TechRepair2024");
 
             }
 
@@ -52,12 +52,12 @@ public class EmailSendCustomer {
             message.addRecipient(Message.RecipientType.TO, new InternetAddress(to));
 
             // Set Subject: header field
-            message.setSubject("Car Care Order status update !");
+            message.setSubject("TechRepair Order status update !");
 
             message.setContent("<h2>Your Order has been completed!</h2>"
 
 
-                            + "<h3>Please contact Car Care to get more details..</h3>",
+                            + "<h3>Please contact TechRepair to get more details..</h3>",
                     "text/html");
 
             // Send message
