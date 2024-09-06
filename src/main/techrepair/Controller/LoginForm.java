@@ -44,7 +44,7 @@ public class LoginForm extends JFrame{
         Dashboard dashboard = new Dashboard();
         dashboard.setContentPane(dashboard.dashboardPane);
         dashboard.setTitle("Dashboard TechRepair");
-        dashboard.setSize(600,500);
+        dashboard.setSize(700,800);
         dashboard.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         dashboard.initializeComponents();
         setVisible(false);

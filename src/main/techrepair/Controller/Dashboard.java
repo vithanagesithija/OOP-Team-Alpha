@@ -17,6 +17,10 @@ public class Dashboard extends JFrame {
 
 
     public Dashboard() {
+
+        // Add Icons to buttons
+        // manageCustomersButton.setIcon(new ImageIcon("src/main/techrepair/Image/Admin Settings Male.png"));
+
         manageCustomersButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
