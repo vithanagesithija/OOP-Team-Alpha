@@ -22,7 +22,7 @@ public class UpdateEmployee extends  JFrame {
         updateButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                String eid = txtEduty.getText();
+                String eid = txtEOID.getText();
                 String ename = txtEname.getText();
                 String E_email = txtEmail.getText();
                 String Duty = txtEduty.getText();

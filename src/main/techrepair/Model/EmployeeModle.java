@@ -1,9 +1,7 @@
 package Model;
-
 import DBLayer.DbConnection;
 import DTO.CustomerDto;
 import DTO.EmployeesDto;
-
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.SQLException;
@@ -24,7 +22,10 @@ public class EmployeeModle {
     public  boolean updateEmployee(EmployeesDto employeesDto) throws SQLException {
         Connection connection = DbConnection.getInstance().getConnection();
 
-        String sql = "UPDATE  Employee SET  Name = ?, Duty = ?, Email = ? Id = ?";
+        String sql = "UPDATE  Employee SET  Name = ?, Duty = ?, Email = ? WHERE Id = ?";
+        System.out.println("Executing query: " + sql);
+        System.out.println("With parameters: " + employeesDto.getName() + ", " + employeesDto.getDuty() + ", " + employeesDto.getEmail() + ", " + employeesDto.getId());
+
         PreparedStatement ptsm = connection.prepareStatement(sql);
         ptsm.setString(1, employeesDto.getName());
         ptsm.setString(2, employeesDto.getDuty());

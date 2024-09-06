@@ -25,7 +25,7 @@ public class CustomerModle {
     public boolean updateCustomer(CustomerDto customerDto) throws SQLException {
         Connection connection = DbConnection.getInstance().getConnection();
 
-        String sql = "UPDATE Customer SET Name = ?, Contact = ?, Email = ?, WHERE Id = ?";
+        String sql = "UPDATE Customer SET Name = ?, Contact = ?, Email = ? WHERE Id = ?";
         PreparedStatement pstm = connection.prepareStatement(sql);
         pstm.setString(1, customerDto.getName());
         pstm.setString(2, customerDto.getContact());
