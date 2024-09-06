@@ -24,10 +24,10 @@ public class RepoartGenarate extends JFrame {
         setLayout(new BorderLayout());
         tableModel = new DefaultTableModel();
         tableModel.setColumnIdentifiers(new String[]{"Order Id", "Customer", "Price"});
-        RepoartTable = new javax.swing.JTable();
-        RepoartTable = new JTable(tableModel);
-        JRepane = new javax.swing.JScrollPane();
+        RepoartTable.setModel(tableModel);
         JRepane.setViewportView(RepoartTable);
+
+        refreshTable();
 
 
         reportButton.addActionListener(new ActionListener() {
@@ -50,8 +50,8 @@ public class RepoartGenarate extends JFrame {
                 tableModel.setRowCount(0);
 
                 while (resultSet.next()) {
-                    String order_id = resultSet.getString("orderID");
-                    String customer_name = resultSet.getString("custName");
+                    String order_id = resultSet.getString("Id");
+                    String customer_name = resultSet.getString("CustomerId");
                     String Price = resultSet.getString("Price");
                     System.out.println("********.refreshTable().*******");
 
@@ -60,10 +60,8 @@ public class RepoartGenarate extends JFrame {
                     System.out.println(order_id);
                     System.out.println(Price);
 
-                    DefaultTableModel df1 = (DefaultTableModel) RepoartTable.getModel();
-                    df1.setRowCount(0);
-                    df1.addRow(new Object[]{order_id, customer_name, Price});
-                    System.out.println("count "+tableModel.getRowCount());
+                    tableModel.addRow(new String[]{order_id, customer_name, Price});
+
                 }
 
 
